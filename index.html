@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Krishaa Sanghavi — Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0E14;
+    --surface:#121722;
+    --surface-2:#161C29;
+    --text:#E8E6DE;
+    --muted:#8B93A7;
+    --amber:#E8A33D;
+    --cyan:#5FB3B3;
+    --line:#232B3A;
+    --serif:'Fraunces', serif;
+    --mono:'JetBrains Mono', monospace;
+    --sans:'IBM Plex Sans', system-ui, sans-serif;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:inherit;}
+  html{scroll-behavior:smooth; scroll-padding-top:env(safe-area-inset-top,0px);}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--amber); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--cyan); outline-offset:3px;}
+
+  .wrap{max-width:920px; margin:0 auto; padding:0 24px;}
+
+  /* NAV */
+  nav{
+    position:sticky; top:env(safe-area-inset-top,0px); z-index:10;
+    background:rgba(11,14,20,0.9); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:56px;}
+  .nav-name{font-family:var(--mono); font-size:0.85rem; color:var(--text);}
+  .nav-links{display:flex; gap:22px; font-family:var(--mono); font-size:0.82rem;}
+  .nav-links a{color:var(--muted);}
+  .nav-links a:hover{color:var(--amber);}
+
+  /* HERO */
+  header.hero{padding:72px 0 56px;}
+  .hero-grid{max-width:640px;}
+
+  h1.name{
+    font-family:var(--serif); font-weight:500; font-size:clamp(2.4rem,6vw,3.6rem);
+    margin:0 0 10px; line-height:1.05; letter-spacing:-0.01em;
+  }
+  .role{font-size:1.05rem; color:var(--muted); max-width:46ch; margin:0;}
+
+  /* SECTIONS */
+  section{padding:52px 0; border-top:1px solid var(--line);}
+  .sec-head{margin-bottom:30px;}
+  .sec-head h2{font-family:var(--serif); font-weight:500; font-size:1.7rem; margin:0;}
+
+  /* PROJECTS */
+  .project{
+    background:var(--surface); border:1px solid var(--line); border-radius:10px;
+    padding:28px 30px; margin-bottom:22px;
+  }
+  .project-top{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:8px; margin-bottom:6px;}
+  .project h3{font-family:var(--serif); font-weight:500; font-size:1.35rem; margin:0;}
+  .project .date{font-family:var(--mono); color:var(--muted); font-size:0.8rem;}
+  .stack{display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 16px;}
+  .stack span{
+    font-family:var(--mono); font-size:0.74rem; color:var(--cyan);
+    border:1px solid var(--line); border-radius:4px; padding:3px 8px;
+  }
+  .project ul{margin:0; padding-left:20px; color:var(--muted);}
+  .project li{margin-bottom:9px;}
+  .project li::marker{color:var(--amber);}
+
+  /* SKILLS */
+  .skills-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:22px 40px;}
+  @media (max-width:600px){ .skills-grid{grid-template-columns:1fr;} }
+  .skill-row{padding:14px 0; border-bottom:1px solid var(--line);}
+  .skill-row .label{font-family:var(--mono); font-size:0.78rem; color:var(--muted); margin-bottom:6px;}
+  .skill-row .items{font-size:0.95rem;}
+
+  /* EDUCATION timeline */
+  .edu-item{display:grid; grid-template-columns:120px 1fr; gap:20px; padding:16px 0; border-bottom:1px solid var(--line);}
+  .edu-item:last-child{border-bottom:none;}
+  .edu-item .yr{font-family:var(--mono); color:var(--muted); font-size:0.82rem;}
+  .edu-item h3{margin:0 0 4px; font-family:var(--serif); font-weight:500; font-size:1.1rem;}
+  .edu-item .meta{color:var(--muted); font-size:0.9rem;}
+  .edu-item .score{color:var(--amber); font-family:var(--mono); font-size:0.82rem; margin-top:4px;}
+
+  /* tabs: achievements / extracurriculars */
+  .tabs{display:flex; gap:6px; border-bottom:1px solid var(--line); margin-bottom:24px;}
+  .tab-btn{
+    font-family:var(--sans); font-size:0.95rem; font-weight:500; color:var(--muted);
+    background:none; border:none; padding:10px 4px; cursor:pointer;
+    border-bottom:2px solid transparent; margin-bottom:-1px;
+  }
+  .tab-btn + .tab-btn{margin-left:20px;}
+  .tab-btn:hover{color:var(--text);}
+  .tab-btn.active{color:var(--amber); border-bottom-color:var(--amber);}
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block;}
+  .tab-panel ul{margin:0; padding-left:18px; color:var(--muted);}
+  .tab-panel li{margin-bottom:10px;}
+  .tab-panel li::marker{color:var(--amber);}
+
+  /* FOOTER */
+  footer{padding:44px 0 60px; text-align:left;}
+  footer .big{font-family:var(--serif); font-size:clamp(1.6rem,4vw,2.2rem); margin:0 0 18px;}
+  .contact-links{display:flex; flex-wrap:wrap; gap:22px; font-family:var(--mono); font-size:0.85rem;}
+  .foot-note{margin-top:36px; color:var(--muted); font-size:0.78rem; font-family:var(--mono);}
+
+  .copy-btn{
+    font-family:inherit; font-size:inherit; color:inherit;
+    background:none; border:none; border-bottom:1px solid var(--line);
+    padding-bottom:2px; cursor:pointer;
+  }
+  .copy-btn:hover{color:var(--amber); border-color:var(--amber);}
+  .copy-toast{
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(12px);
+    background:var(--surface-2); border:1px solid var(--line); color:var(--text);
+    font-family:var(--mono); font-size:0.8rem; padding:9px 16px; border-radius:6px;
+    opacity:0; pointer-events:none; transition:opacity 0.2s ease, transform 0.2s ease;
+    z-index:50;
+  }
+  .copy-toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  :root:not([data-theme="light"]) {}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-links">
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1 class="name">Krishaa Sanghavi</h1>
+      <p class="role">I build full-stack products and developer tools — from real-time platforms to autonomous coding agents — and I'm currently studying Information Technology at Pune Institute of Computer Technology.</p>
+    </div>
+  </div>
+</header>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head"><h2>Projects</h2></div>
+
+    <div class="project">
+      <div class="project-top">
+        <h3>RoCode</h3>
+        <span class="date">May 2026</span>
+      </div>
+      <p style="color:var(--muted); margin:4px 0 0;">An autonomous CLI coding agent, built from scratch.</p>
+      <div class="stack">
+        <span>Python</span><span>Gemini API</span><span>Groq API</span><span>OpenAI SDK</span><span>Rich</span><span>AST</span>
+      </div>
+      <ul>
+        <li>Implements a ReAct (Reason–Act–Observe) loop from scratch, with a provider-agnostic LLM layer supporting Gemini, Groq, and OpenAI-compatible APIs.</li>
+        <li>A 4-stage context management pipeline — output truncation, token tracking, stale-payload pruning, LLM-powered compaction — cutting token usage by ~90% versus full-repo ingestion on 10,000+ line codebases.</li>
+        <li>Sandboxed tool execution with AST-based safety validation that blocks dangerous imports and built-ins in run_python, plus workspace-scoped path resolution to prevent path traversal.</li>
+        <li>An explore command that auto-generates schema-validated architecture reports — Mermaid diagrams and AGENTS.md — via structured JSON extraction from LLM output.</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <div class="project-top">
+        <h3>Collabrix</h3>
+        <span class="date">February 2026</span>
+      </div>
+      <p style="color:var(--muted); margin:4px 0 0;">A full-stack MERN platform connecting brands and influencers.</p>
+      <div class="stack">
+        <span>React</span><span>TypeScript</span><span>Node.js</span><span>MongoDB</span><span>Socket.IO</span><span>PySpark</span><span>Apache Airflow</span>
+      </div>
+      <ul>
+        <li>Dual-role dashboards for Brands and Influencers supporting campaign creation, pitching, and invitation workflows.</li>
+        <li>Real-time messaging and smart notifications via Socket.IO — instant chat, campaign alerts, and new-request updates across roles.</li>
+        <li>Role-based access control with JWT auth, protected routes, and tab-isolated sessions for secure multi-tab browsing.</li>
+        <li>An analytics dashboard tracking influencer performance (YouTube/Instagram) and brand ROI, alongside a filterable profile marketplace.</li>
+        <li>A PySpark + Airflow pipeline automating YouTube analytics ETL, turning raw JSON into Parquet on DAG-based schedules.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head"><h2>Skills</h2></div>
+    <div class="skills-grid">
+      <div class="skill-row">
+        <div class="label">languages</div>
+        <div class="items">C++, Java, Python</div>
+      </div>
+      <div class="skill-row">
+        <div class="label">frontend</div>
+        <div class="items">HTML, CSS, JavaScript, TypeScript, React.js, Next.js</div>
+      </div>
+      <div class="skill-row">
+        <div class="label">backend</div>
+        <div class="items">Node.js, Express.js, .NET</div>
+      </div>
+      <div class="skill-row">
+        <div class="label">databases</div>
+        <div class="items">MySQL, MongoDB</div>
+      </div>
+      <div class="skill-row">
+        <div class="label">other</div>
+        <div class="items">Git, GitHub, Socket.IO, WebSockets</div>
+      </div>
+      <div class="skill-row">
+        <div class="label">cs fundamentals</div>
+        <div class="items">OOP, DSA, DBMS, Computer Networks, Operating Systems</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="sec-head"><h2>Education</h2></div>
+
+    <div class="edu-item">
+      <div class="yr">2023 – 2027</div>
+      <div>
+        <h3>Pune Institute of Computer Technology</h3>
+        <div class="meta">B.E. in Information Technology</div>
+        <div class="score">9.53 CGPA</div>
+      </div>
+    </div>
+    <div class="edu-item">
+      <div class="yr">2021 – 2023</div>
+      <div>
+        <h3>City International School</h3>
+        <div class="meta">CBSE, Class XII</div>
+        <div class="score">86.20%</div>
+      </div>
+    </div>
+    <div class="edu-item">
+      <div class="yr">2008 – 2021</div>
+      <div>
+        <h3>Hutchings High School</h3>
+        <div class="meta">ICSE, Class X</div>
+        <div class="score">99%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="more">
+  <div class="wrap">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="showTab('achievements', this)">Achievements</button>
+      <button class="tab-btn" onclick="showTab('extracurriculars', this)">Extracurriculars</button>
+    </div>
+    <div class="tab-panel active" id="achievements">
+      <ul>
+        <li>Rank 675 (Girls – Maharashtra) and All India Rank 8206 in MHT-CET 2023.</li>
+        <li>200+ coding problems solved on LeetCode.</li>
+      </ul>
+    </div>
+    <div class="tab-panel" id="extracurriculars">
+      <ul>
+        <li>Event Head for Manthan by PICTOREAL, PICT.</li>
+        <li>Active member of the IEEE Technical Team, PICT, and NSS, PICT.</li>
+        <li>Point of Contact for INC 2025.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <p class="big">Contact</p>
+    <div class="contact-links">
+      <button class="copy-btn" onclick="copyText('krishaasanghavi24@gmail.com', this)">krishaasanghavi24@gmail.com</button>
+      <button class="copy-btn" onclick="copyText('9168809245', this)">9168809245</button>
+      <a href="https://www.linkedin.com/in/krishaa-sanghavi-21b0a3337" target="_blank" rel="noopener noreferrer">
+  linkedin.com/in/krishaa-sanghavi
+</a>
+    </div>
+  </div>
+</footer>
+
+<div class="copy-toast" id="toast">copied to clipboard</div>
+
+<script>
+function showTab(id, btn){
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+async function copyText(value, el){
+  const toast = document.getElementById('toast');
+  try{
+    await navigator.clipboard.writeText(value);
+  }catch(e){
+    const ta = document.createElement('textarea');
+    ta.value = value;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try{ document.execCommand('copy'); }catch(err){}
+    document.body.removeChild(ta);
+  }
+  toast.textContent = value + ' copied';
+  toast.classList.add('show');
+  clearTimeout(window.__toastTimer);
+  window.__toastTimer = setTimeout(()=> toast.classList.remove('show'), 1800);
+}
+</script>
+
+</body>
+</html>
